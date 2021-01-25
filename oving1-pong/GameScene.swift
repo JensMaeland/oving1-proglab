@@ -52,12 +52,7 @@ class GameScene: SKScene {
     func stopGame() {
         topLabel.text = "\(score[1])"
         btmLabel.text = "\(score[0])"
-        
-        if Int(topLabel.text) > Int(btmLabel.text) {
-            
-        }
-        
-        let alert = UIAlertController(title: "Spillet er over!", message: "Vinneren er ", preferredStyle: <#T##UIAlertController.Style#>)
+
     }
     
     func addScore(playerWinner : SKSpriteNode) {

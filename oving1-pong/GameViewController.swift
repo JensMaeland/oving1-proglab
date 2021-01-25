@@ -15,6 +15,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
+    
+            
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
@@ -25,6 +27,19 @@ class GameViewController: UIViewController {
                 // Present the scene
                 view.presentScene(scene)
             }
+            
+            
+            // Load the SKScene from 'GameScene.sks'
+            if let scene = SKScene(fileNamed: "HeliScene") {
+                // Set the scale mode to scale to fit the window
+                scene.scaleMode = .aspectFill
+                
+                scene.size.height = 1334
+                
+                // Present the scene
+                view.presentScene(scene)
+            }
+        
             
             view.ignoresSiblingOrder = true
             
@@ -46,6 +61,6 @@ class GameViewController: UIViewController {
     }
 
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
 }
