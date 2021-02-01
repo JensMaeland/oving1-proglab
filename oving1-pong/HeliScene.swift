@@ -8,17 +8,22 @@
 
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class HeliScene: SKScene {
+    
+    var sound: AVAudioPlayer?
     
     var choppa = SKSpriteNode()
     var main = SKSpriteNode()
     var topLabel = SKLabelNode()
+    var exit = SKLabelNode()
     
     var score = [Int]()
     
     override func didMove(to view: SKView) {
         topLabel = self.childNode(withName: "topLabel") as! SKLabelNode
+        exit = self.childNode(withName: "exit") as! SKLabelNode
         
         choppa = self.childNode(withName: "choppa") as! SKSpriteNode
         main = self.childNode(withName: "main") as! SKSpriteNode
@@ -39,12 +44,61 @@ class HeliScene: SKScene {
         self.physicsBody = border
     }
     
+    func mainMenu() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView? else {
+            print("Could not get Skview")
+            return
+        }
+
+        /* 2) Load Game scene */
+        guard let scene = GameScene(fileNamed:"MainMenu") else {
+            print("Could not make GameScene, check the name is spelled correctly")
+            return
+        }
+
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+    }
+    
+    func playSound() {
+        guard let url = Bundle.main.url(forResource: "soundName", withExtension: "mp3") else { return }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+
+            /* The following line is required for the player to work on iOS 11. Change the file type accordingly*/
+            sound = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileType.mp3.rawValue)
+
+            /* iOS 10 and earlier require the following line:
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeMPEGLayer3) */
+
+            guard let player = sound else { return }
+
+            player.play()
+
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
             choppa.position = CGPoint(x: 0, y: 0)
+            let node = self.atPoint(touch.location(in: self))
+            if (node.name == "exit") {
+                self.mainMenu();
+            }
         }
-        
     }
     
     

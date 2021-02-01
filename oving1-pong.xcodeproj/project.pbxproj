@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2D0E82025C81869006CB7ED /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = B2D0E81F25C81869006CB7ED /* MainMenu.sks */; };
+		B2D0E82525C81904006CB7ED /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2D0E82425C81904006CB7ED /* MainMenu.swift */; };
 		B2FA6D8225BF3064005278D3 /* HeliScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FA6D8125BF3064005278D3 /* HeliScene.swift */; };
 		B2FA6D8F25BF33D3005278D3 /* HeliScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = B2FA6D8E25BF33D3005278D3 /* HeliScene.sks */; };
 		B47C592125BDA2BF00D54193 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47C592025BDA2BF00D54193 /* AppDelegate.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B2D0E81F25C81869006CB7ED /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		B2D0E82425C81904006CB7ED /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 		B2FA6D8125BF3064005278D3 /* HeliScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeliScene.swift; sourceTree = "<group>"; };
 		B2FA6D8E25BF33D3005278D3 /* HeliScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HeliScene.sks; sourceTree = "<group>"; };
 		B47C591D25BDA2BF00D54193 /* oving1-pong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "oving1-pong.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +119,8 @@
 				B47C592A25BDA2BF00D54193 /* Main.storyboard */,
 				B47C592D25BDA2C000D54193 /* Assets.xcassets */,
 				B47C592F25BDA2C000D54193 /* Info.plist */,
+				B2D0E81F25C81869006CB7ED /* MainMenu.sks */,
+				B2D0E82425C81904006CB7ED /* MainMenu.swift */,
 			);
 			path = "oving1-pong";
 			sourceTree = "<group>";
@@ -241,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B47C592C25BDA2BF00D54193 /* Main.storyboard in Resources */,
+				B2D0E82025C81869006CB7ED /* MainMenu.sks in Resources */,
 				B47C592325BDA2BF00D54193 /* GameScene.sks in Resources */,
 				B47C592E25BDA2C000D54193 /* Assets.xcassets in Resources */,
 				B47C592525BDA2BF00D54193 /* Actions.sks in Resources */,
@@ -269,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D0E82525C81904006CB7ED /* MainMenu.swift in Sources */,
 				B47C592725BDA2BF00D54193 /* GameScene.swift in Sources */,
 				B47C592925BDA2BF00D54193 /* GameViewController.swift in Sources */,
 				B2FA6D8225BF3064005278D3 /* HeliScene.swift in Sources */,

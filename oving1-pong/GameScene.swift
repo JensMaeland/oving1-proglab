@@ -16,6 +16,7 @@ class GameScene: SKScene {
     
     var topLabel = SKLabelNode()
     var btmLabel = SKLabelNode()
+    var exit = SKLabelNode()
     
     var score = [Int]()
     
@@ -24,6 +25,7 @@ class GameScene: SKScene {
         
         topLabel = self.childNode(withName: "topLabel") as! SKLabelNode
         btmLabel = self.childNode(withName: "btmLabel") as! SKLabelNode
+        exit = self.childNode(withName: "exit") as! SKLabelNode
         
         ball = self.childNode(withName: "ball") as! SKSpriteNode
         enemy = self.childNode(withName: "enemy") as! SKSpriteNode
@@ -74,13 +76,40 @@ class GameScene: SKScene {
         btmLabel.text = "\(score[0])"
     }
     
+    func mainMenu() {
+        /* 1) Grab reference to our SpriteKit view */
+        guard let skView = self.view as SKView? else {
+            print("Could not get Skview")
+            return
+        }
+
+        /* 2) Load Game scene */
+        guard let scene = GameScene(fileNamed:"MainMenu") else {
+            print("Could not make GameScene, check the name is spelled correctly")
+            return
+        }
+
+        /* 3) Ensure correct aspect mode */
+        scene.scaleMode = .aspectFill
+
+        /* Show debug */
+        skView.showsPhysics = true
+        skView.showsDrawCount = true
+        skView.showsFPS = true
+
+        /* 4) Start game scene */
+        skView.presentScene(scene)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches {
             let location = touch.location(in: self)
+            let node = self.atPoint(location)
             main.run(SKAction.moveTo(x: location.x, duration: 0.2))
+            if (node.name == "exit") {
+                self.mainMenu();
+            }
         }
-        
     }
     
     
