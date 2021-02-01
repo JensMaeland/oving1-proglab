@@ -90,7 +90,9 @@ class HeliScene: SKScene {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            choppa.position = CGPoint(x: 0, y: 0)
+            let location = touch.location(in: self)
+            choppa.run(SKAction.moveTo(x: location.x, duration: 0	))
+            choppa.run(SKAction.moveTo(x: location.y, duration: 0.2))
             let node = self.atPoint(touch.location(in: self))
             if (node.name == "exit") {
                 self.mainMenu();
