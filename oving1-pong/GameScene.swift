@@ -13,10 +13,13 @@ class GameScene: SKScene {
     var ball = SKSpriteNode()
     var enemy = SKSpriteNode()
     var main = SKSpriteNode()
+    var button2 = SKSpriteNode()
     
     var topLabel = SKLabelNode()
     var btmLabel = SKLabelNode()
     var exit = SKLabelNode()
+    var playAgain = SKLabelNode()
+    
     
     var score = [Int]()
     
@@ -26,12 +29,14 @@ class GameScene: SKScene {
         topLabel = self.childNode(withName: "topLabel") as! SKLabelNode
         btmLabel = self.childNode(withName: "btmLabel") as! SKLabelNode
         exit = self.childNode(withName: "exit") as! SKLabelNode
+        playAgain = self.childNode(withName: "playAgain") as! SKLabelNode
         
+        button2 = self.childNode(withName: "button2") as! SKSpriteNode
         ball = self.childNode(withName: "ball") as! SKSpriteNode
         enemy = self.childNode(withName: "enemy") as! SKSpriteNode
         main = self.childNode(withName: "main") as! SKSpriteNode
         
-        ball.physicsBody?.applyImpulse(CGVector(dx: 15, dy: 15))
+        
         
         let border = SKPhysicsBody(edgeLoopFrom: self.frame)
         
@@ -45,15 +50,31 @@ class GameScene: SKScene {
     
     func startGame() {
         score = [0,0]
+        ball.position = CGPoint(x: 0, y: 0)
+        ball.physicsBody?.applyImpulse(CGVector(dx: 15, dy: 15))
         
+        playAgain.isHidden = true
+        button2.isHidden = true
         topLabel.text = "\(score[1])"
         btmLabel.text = "\(score[0])"
         
     }
     
     func stopGame() {
-        topLabel.text = "\(score[1])"
-        btmLabel.text = "\(score[0])"
+        if score[0] > score[1] {
+            topLabel.text = "You Win!"
+            btmLabel.text = ""
+        }
+        else {
+            topLabel.text = "Bot won, Try again!"
+            btmLabel.text = ""
+        }
+        
+        playAgain.isHidden = false
+        print(playAgain.isHidden)
+        button2.isHidden = false
+        print(button2.isHidden)
+        ball.position = CGPoint(x: 0, y: 0)
 
     }
     
@@ -62,13 +83,21 @@ class GameScene: SKScene {
         ball.position = CGPoint(x: 0, y: 0)
         ball.physicsBody?.velocity = CGVector(dx: 0, dy: 0)
         
-        if playerWinner == main {
+        checkWinner1:if playerWinner == main {
             score[0] += 1
+            if score[0] > 2 {
+                stopGame()
+                break checkWinner1
+            }
             ball.physicsBody?.applyImpulse(CGVector(dx: 15, dy: 15))
         }
         
-        else if playerWinner == enemy{
+        checkWinner2:if playerWinner == enemy{
             score[1] += 1
+            if score[1] > 2 {
+                stopGame()
+                break checkWinner2
+            }
             ball.physicsBody?.applyImpulse(CGVector(dx: -15, dy: -15))
         }
         
@@ -108,6 +137,9 @@ class GameScene: SKScene {
             main.run(SKAction.moveTo(x: location.x, duration: 0.2))
             if (node.name == "exit") {
                 self.mainMenu();
+            }
+            if (node.name == "playAgain") {
+                self.startGame()
             }
         }
     }
