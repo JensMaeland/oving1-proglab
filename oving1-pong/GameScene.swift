@@ -46,12 +46,13 @@ class GameScene: SKScene {
         self.physicsBody = border
         
         startGame()
+        
     }
     
     func startGame() {
         score = [0,0]
         ball.position = CGPoint(x: 0, y: 0)
-        ball.physicsBody?.applyImpulse(CGVector(dx: 15, dy: 15))
+        ball.physicsBody?.applyImpulse(CGVector(dx: 18, dy: 18))
         
         playAgain.isHidden = true
         button2.isHidden = true
@@ -61,19 +62,9 @@ class GameScene: SKScene {
     }
     
     func stopGame() {
-        if score[0] > score[1] {
-            topLabel.text = "You Win!"
-            btmLabel.text = ""
-        }
-        else {
-            topLabel.text = "Bot won, Try again!"
-            btmLabel.text = ""
-        }
         
         playAgain.isHidden = false
-        print(playAgain.isHidden)
         button2.isHidden = false
-        print(button2.isHidden)
         ball.position = CGPoint(x: 0, y: 0)
 
     }
@@ -89,7 +80,8 @@ class GameScene: SKScene {
                 stopGame()
                 break checkWinner1
             }
-            ball.physicsBody?.applyImpulse(CGVector(dx: 15, dy: 15))
+            ball.physicsBody?.applyImpulse(CGVector(dx: 18, dy: 18))
+            
         }
         
         checkWinner2:if playerWinner == enemy{
@@ -98,7 +90,7 @@ class GameScene: SKScene {
                 stopGame()
                 break checkWinner2
             }
-            ball.physicsBody?.applyImpulse(CGVector(dx: -15, dy: -15))
+            ball.physicsBody?.applyImpulse(CGVector(dx: -18, dy: -18))
         }
         
         topLabel.text = "\(score[1])"
