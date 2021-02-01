@@ -15,10 +15,10 @@ class HeliScene: SKScene {
     var sound: AVAudioPlayer?
     
     var choppa = SKSpriteNode()
-    var main = SKSpriteNode()
+    var box1 = SKSpriteNode()
+    var box2 = SKSpriteNode()
     var exit = SKLabelNode()
     var label = SKLabelNode()
-    var texture = SKTexture()
     
     var score = [Int]()
     
@@ -27,9 +27,8 @@ class HeliScene: SKScene {
         label = self.childNode(withName: "label") as! SKLabelNode
         
         choppa = self.childNode(withName: "choppa") as! SKSpriteNode
-        main = self.childNode(withName: "main") as! SKSpriteNode
-        
-        //texture = self.texture(withName: "helitexture") as! SKTexture
+        box1 = self.childNode(withName: "box1") as! SKSpriteNode
+        box2 = self.childNode(withName: "box2") as! SKSpriteNode
         
         choppa.physicsBody?.mass = 0
         choppa.physicsBody?.restitution = 1
@@ -38,10 +37,29 @@ class HeliScene: SKScene {
         choppa.physicsBody?.angularDamping = 0
         choppa.physicsBody?.applyImpulse(CGVector(dx: 375, dy: 275))
         
-        let animation = SKAction.animate(with: choppa.texture, timePerFrame: 0.1)
+        let texture1: SKTexture = SKTexture.init(imageNamed: "helitexture1");
+        let texture2: SKTexture = SKTexture.init(imageNamed: "helitexture2");
+        let texture3: SKTexture = SKTexture.init(imageNamed: "helitexture3");
+        let texture4: SKTexture = SKTexture.init(imageNamed: "helitexture4");
 
-        choppa.run(animation)
+        let changeTextures = SKAction.animate(with:[texture1, texture2, texture3, texture4], timePerFrame: 0.07);
+        let animation = SKAction.repeatForever(changeTextures);
+        choppa.run(animation);
          
+        box1.physicsBody?.mass = 0.1
+        box1.physicsBody?.restitution = 1
+        box1.physicsBody?.friction = 0
+        box1.physicsBody?.linearDamping = 0.05
+        box1.physicsBody?.angularDamping = 0
+         
+        box2.physicsBody?.restitution = 1
+        box2.physicsBody?.friction = 0
+        box2.physicsBody?.linearDamping = 0.05
+        box2.physicsBody?.angularDamping = 0
+                
+        box1.physicsBody?.applyImpulse(CGVector(dx: 40, dy: 40))
+        box2.physicsBody?.applyImpulse(CGVector(dx: -40, dy: -40))
+
         
         let border = SKPhysicsBody(edgeLoopFrom: self.frame)
         

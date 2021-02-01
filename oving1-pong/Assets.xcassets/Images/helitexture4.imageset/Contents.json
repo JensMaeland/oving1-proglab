@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "heli1.png",
+      "filename" : "helic4.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "heli2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "heli3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
